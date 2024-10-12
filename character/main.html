@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving Block Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+ <style>
+     #game-area {
+      width: 62rem; /* 사용자 정의 너비 */
+      height: 49rem; /* 사용자 정의 높이 */
+      background-color: #E5E7EB; /* Tailwind gray-300 색상 */
+      border: 2px solid black; /* 테두리 */
+      overflow: hidden; /* 영역 밖으로 나가지 않도록 설정 */
+      position: relative;
+    }
+
+      #block {
+      position: absolute; /* 벽돌의 절대 위치 설정 */
+      top: 50%; /* 초기 위치 설정 */
+      left: 50%;
+      transform: translate(-50%, -50%); /* 중앙 정렬 */
+    }
+
+  </style>
+</head>
+<body class="bg-gray-200 flex items-center justify-center min-h-screen">
+<div id="game-area">
+    <img id="block" src="right_1.png" alt="block" class="w-64 h-64">
+    <img id="monster" src="monster.png" alt="block" class="w-32 h-32">
+</div>
+
+<script>
+    const moveSpeed = 10; // 이동 속도
+    const block = document.getElementById('block');
+    const gameArea = document.getElementById('game-area');
+
+    let blockX = (gameArea.clientWidth / 2) - (block.offsetWidth / 2);
+    let blockY = (gameArea.clientHeight / 2) - (block.offsetHeight / 2);
+    let action = 'left';
+
+    // 이미지의 초기 위치 설정
+    block.style.top = blockY + 'px';
+    block.style.left = blockX + 'px';
+
+    window.addEventListener('keydown', function(event) {
+    console.log(event.key)
+    console.log(action)
+      switch(event.key) {
+        case 'ArrowLeft':
+          if (blockX - moveSpeed >= 0) {
+              blockX -= moveSpeed;
+              block.src='left_1.png'
+              action = 'left'
+          }
+          break;
+        case 'ArrowRight':
+          if (blockX + moveSpeed <= gameArea.clientWidth - block.offsetWidth) {
+            blockX += moveSpeed;
+              block.src='right_1.png'
+              block.src='right_2.png'
+              action = 'right'
+          }
+          break;
+        case 'a':
+                if(action == 'left') {
+                 block.src='left_sord.png'
+                } else if(action == 'right') {
+                 block.src='sord_right.png'
+                }
+      }
+      // 이미지 위치 업데이트
+      block.style.top = blockY + 'px';
+      block.style.left = blockX + 'px';
+    });
+  </script>
+
+</body>
+</html>

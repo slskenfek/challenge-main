@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.head.innerHTML += data;
+        });
+</script>
+
+<body class="bg-gray-100">
+<canvas id="mapCanvas" width="800" height="600"></canvas>
+
+
+</script>
+</body>
+</html>
